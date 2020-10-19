@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -115,6 +116,9 @@ public class MainActivity extends Activity implements LoaderManager.LoaderCallba
     }
 
     private void openDetailsActivity(long contactId) {
+        Intent intent = new Intent (this, DetailsActivity.class);
+        intent.putExtra(DetailsActivity.CONTACT_ID_EXTRA, contactId);
+        startActivity(intent);
         /*
          * TODO #3 Реализовать открытие DetailsActivity через Intent
          *  https://developer.android.com/training/basics/firstapp/starting-activity

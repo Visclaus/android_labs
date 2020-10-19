@@ -11,6 +11,11 @@ public class CipherTextWrapperStorageImpl implements CipherTextWrapperStorage {
 
     @Override
     public void persistCipherTextWrapper(Context context, CipherTextWrapper wrapper) {
+        SharedPreferences sharedPreferences = context.getSharedPreferences(SHARED_PREF_FILE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString(PIN_KEY, wrapper.getCipherText());
+        editor.putString(PIN_IV_KEY, wrapper.getInitializationVector());
+        editor.commit();
         /*
          *  TODO #1 Реализовать сохрание шифр. текста cipherText и вектора инициализации initializationVector
          *    из CipherTextWrapper в SharedPreferences, используя ключи PIN_KEY и PIN_IV_KEY
