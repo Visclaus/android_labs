@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.Activity;
 import android.app.LoaderManager;
 import android.content.CursorLoader;
+import android.content.Intent;
 import android.content.Loader;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -20,9 +21,9 @@ import androidx.core.content.ContextCompat;
 
 public class MainActivity extends Activity implements LoaderManager.LoaderCallbacks<Cursor>, AdapterView.OnItemClickListener {
 
-    private final static int READ_CONTACTS_PERMISSION_CODE = 123;
+    private static final int READ_CONTACTS_PERMISSION_CODE = 123;
 
-    private final static String[] FROM_COLUMNS = {
+    private static final String[] FROM_COLUMNS = {
             ContactsContract.Contacts.DISPLAY_NAME_PRIMARY
     };
 
@@ -31,7 +32,7 @@ public class MainActivity extends Activity implements LoaderManager.LoaderCallba
             ContactsContract.Contacts.DISPLAY_NAME_PRIMARY
     };
 
-    private final static int[] TO_IDS = {
+    private static final int[] TO_IDS = {
             android.R.id.text1
     };
 
@@ -115,8 +116,11 @@ public class MainActivity extends Activity implements LoaderManager.LoaderCallba
     }
 
     private void openDetailsActivity(long contactId) {
+        Intent intent = new Intent (this, DetailsActivity.class);
+        intent.putExtra(DetailsActivity.CONTACT_ID_EXTRA, contactId);
+        startActivity(intent);
         /*
-         * TODO #1 Реализовать открытие DetailsActivity через Intent
+         * TODO #3 Реализовать открытие DetailsActivity через Intent
          *  https://developer.android.com/training/basics/firstapp/starting-activity
          *  и передать contactId через extra
          */
